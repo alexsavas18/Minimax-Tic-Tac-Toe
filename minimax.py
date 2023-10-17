@@ -183,19 +183,28 @@ def player2_minimax(board):
 
     return best_move, move_time
 
-# Minimax algorithm with alpha-beta pruning
+# Recursive minimax algorithm with alpha-beta pruning
+# Alpha-beta pruning is a method to eliminate branches in the search tree that don't affect the final decision, which improves efficiency
+# Alpha represents the bes score for the maximizing player while beta represents the best score for the minimizing player
 def minimax(board, depth, maximizing_player, alpha, beta, player):
     global nodes_generated  # Make nodes_generated global
-
+    
     if depth == 0 or check_win(board, 'X') or check_win(board, 'O') or np.count_nonzero(board == ' ') == 0:
+        # Base case: Return appropriate scores for game outcomes
         if check_win(board, 'X'):
+            # If 'X' wins, return a score indicating a favorable outcome for 'X' (minimizing player)
             return None, -1000
         elif check_win(board, 'O'):
+            # If 'O' wins, return a score indicating a favorable outcome for 'O' (maximizing player)
             return None, 1000
         else:
+            # If it's a draw or the game hasn't concluded, return a heuristic evaluation score
             return None, heuristic_evaluation(board, player)
 
+    # maximizing_player is a boolean argument for minimax
+    # Decides which player (the one making the move or the opponent) will be evaluated next
     if maximizing_player:
+        # The max player wants to maximize the overall score
         max_eval = -np.inf
         best_move = None
         for row in range(ROWS):
@@ -212,7 +221,9 @@ def minimax(board, depth, maximizing_player, alpha, beta, player):
                     if beta <= alpha:
                         break
         return best_move, max_eval
+    # This means the minimizing player is being evaluated
     else:
+        # The min player wants to minimize the overall score, or if possible, maximize the opponent's score
         min_eval = np.inf
         best_move = None
         for row in range(ROWS):
