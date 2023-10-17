@@ -61,6 +61,8 @@ def check_win(board, player):
 
     return False
 
+# Evaluating the heuristic function based on the requirements given
+# This function is used in minimax to help determine the best move
 def heuristic_evaluation(board, player):
     # Initialize variables to count different patterns
     me = player
