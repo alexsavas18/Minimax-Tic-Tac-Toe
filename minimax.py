@@ -232,13 +232,15 @@ def play_game():
     global nodes_generated  # Reset nodes_generated for each game
     nodes_generated = 0
     
-    #Make the initial starting move for player 1
+    # Make the initial starting move for player 1
+    # Future releases could either have a random start position, or allow the start pposition to be configgurable
     game_board[2][3] = 'X'
     display_board(game_board)
     game_over = False
-    #We start with player 2 (O) since player 1 made the first move already
+    # We start with player 2 (O) since player 1 made the first move already
     current_player = 'O'
     
+    # This is how the game is being played, each player, on their turn, will call their respective minimax functions
     while not game_over:
         if current_player == 'X':
             print("Player 1 (X):")
@@ -247,6 +249,7 @@ def play_game():
             print("Player 2 (O):")
             best_move, move_time = player2_minimax(game_board)
 
+        # After the best move is calculated, make that move on the board and display the necessary information (time and nodes generated)
         if best_move is not None:
             row, col = best_move
             print(f"Player {current_player} moves to row {row}, column {col}")
@@ -256,9 +259,12 @@ def play_game():
             make_move(game_board, row, col, current_player)
             display_board(game_board)
 
+            # Check if someone wins and print the winner
             if check_win(game_board, current_player):
                 print(f"Player {current_player} wins!")
                 game_over = True
+
+            # Check for a tie, future releases will have a gameover function to check a win and a tie simultaneously
             elif np.count_nonzero(game_board == ' ') == 0:
                 print("It's a tie!")
                 game_over = True
@@ -266,6 +272,7 @@ def play_game():
             print("Game over.")
             game_over = True
 
+        # Switch players
         current_player = 'X' if current_player == 'O' else 'O'
 
 # Initialize the number of nodes generated
