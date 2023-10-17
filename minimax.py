@@ -154,6 +154,7 @@ def heuristic_evaluation(board, player):
     return h
 
 # NOTE: Because player 1 and player 2 have different depths (how many moves they look ahead), we made 2 separate functions to keep code simple
+# Future releases will allow the depth to be configurable, allowing for different depths each game
 # Implement Player 1 (X)
 def player1_minimax(board):
     # Display the initial game board
