@@ -185,7 +185,7 @@ def player2_minimax(board):
 
 # Recursive minimax algorithm with alpha-beta pruning
 # Alpha-beta pruning is a method to eliminate branches in the search tree that don't affect the final decision, which improves efficiency
-# Alpha represents the bes score for the maximizing player while beta represents the best score for the minimizing player
+# Alpha represents the best score for the maximizing player while beta represents the best score for the minimizing player
 def minimax(board, depth, maximizing_player, alpha, beta, player):
     global nodes_generated  # Make nodes_generated global
     
